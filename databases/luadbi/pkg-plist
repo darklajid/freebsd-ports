@@ -1,0 +1,4 @@
+%%LUA_MODLIBDIR%%/dbdmysql.so
+%%LUA_MODLIBDIR%%/dbdpostgresql.so
+%%LUA_MODLIBDIR%%/dbdsqlite3.so
+%%LUA_MODSHAREDIR%%/DBI.lua

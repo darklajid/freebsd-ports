@@ -1,0 +1,28 @@
+--- Makefile.orig	2010-07-16 08:22:13.000000000 +0200
++++ Makefile	2014-02-14 14:25:05.000000000 +0100
+@@ -1,11 +1,9 @@
+-CC=gcc
+-CFLAGS=-g -pedantic -Wall -O2 -shared -fpic -I /usr/include/lua5.1 -I /usr/include/mysql -I /usr/include/postgresql/ -I /opt/ibm/db2exc/V9.5/include/ -I /usr/lib/oracle/xe/app/oracle/product/10.2.0/client/rdbms/public/ -I .
+ AR=ar rcu
+ RANLIB=ranlib
+ RM=rm -rf
+ MKDIR=mkdir -p
++INSTALL_DATA = install -m 644
+ 
+-COMMON_LDFLAGS=
+ MYSQL_LDFLAGS=$(COMMON_LDFLAGS) -lmysqlclient
+ PSQL_LDFLAGS=$(COMMON_LDFLAGS) -lpq 
+ SQLITE3_LDFLAGS=$(COMMON_LDFLAGS) -lsqlite3 
+@@ -46,6 +44,12 @@
+ oracle: $(BUILDDIR) $(ORACLE_OBJS)
+ 	$(CC) $(CFLAGS) $(ORACLE_OBJS) -o $(DBDORACLE) $(ORACLE_LDFLAGS)
+ 
++install:
++	$(MKDIR) $(DESTDIR)$(INSTALL_DIR_LUA)
++	$(INSTALL_DATA) DBI.lua $(DESTDIR)$(INSTALL_DIR_LUA)/DBI.lua
++	$(MKDIR) $(DESTDIR)$(INSTALL_DIR_BIN)
++	$(INSTALL_DATA) $(DBDMYSQL) $(DBDPSQL) $(DBDSQLITE3) $(DESTDIR)$(INSTALL_DIR_BIN)
++
+ clean:
+ 	$(RM) $(BUILDDIR) $(MYSQL_OBJS) $(PSQL_OBJS) $(SQLITE3_OBJS) $(DB2_OBJS) $(ORACLE_OBJS) $(DBDMYSQL) $(DBDPSQL) $(DBDSQLITE3) $(DBDDB2) $(DBDORACLE) 
+ 
