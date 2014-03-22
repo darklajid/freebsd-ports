@@ -1,0 +1,3 @@
+Simple streaming interface to zlib for Lua.
+
+WWW: https://github.com/brimworks/lua-zlib
