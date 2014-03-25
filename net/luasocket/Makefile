@@ -33,6 +33,7 @@ post-extract:
 	@${REINPLACE_CMD} -e 's/CFLAGS=/CFLAGS\+=/g' ${WRKSRC}/src/Makefile
 	@${REINPLACE_CMD} -e 's/LDFLAGS=/LDFLAGS\+=/g' ${WRKSRC}/src/Makefile
 	@${REINPLACE_CMD} -e 's/prefix/PREFIX/g' ${WRKSRC}/src/Makefile
+	@${REINPLACE_CMD} -e 's/DEF_linux=/DEF_linux=-DUNIX_HAS_SUN_LEN /g' ${WRKSRC}/src/Makefile
 
 post-install:
 .if !defined(NOPORTDOCS)
