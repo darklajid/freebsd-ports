@@ -36,10 +36,10 @@ USES=		gmake
 USE_LUA=	5.1
 WANT_LUA_VER=	5.1
 .if ${PORT_OPTIONS:MLUAJIT}
-CONFIGURE_ARGS+= --runwith=luajit
+CONFIGURE_ARGS+= --runwith=`which luajit`
 .else
 # cannot use ${LUA_CMD} here, it's wrong/'lua'
-CONFIGURE_ARGS+= --runwith=lua-${USE_LUA}
+CONFIGURE_ARGS+= --runwith=lua-`which ${USE_LUA}`
 .endif
 
 HAS_CONFIGURE=	yes
