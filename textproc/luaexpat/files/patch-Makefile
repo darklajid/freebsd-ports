@@ -1,0 +1,22 @@
+--- Makefile.orig	2014-04-03 01:30:37.000000000 +0200
++++ Makefile	2014-04-03 17:39:50.000000000 +0200
+@@ -1,5 +1,6 @@
+ CC		?= cc
+ RM		?= rm -rf
++MKDIR		?= mkdir -p
+ INSTALL		?= install
+ INSTALL_PROGRAM	?= $(INSTALL)
+ INSTALL_DATA	?= $(INSTALL) -m 644
+@@ -27,8 +28,10 @@
+ 	$(CC) $(CF) -o $@ src/$(T)lib.c $(LF)
+ 
+ install:
+-	$(INSTALL_PROGRAM) -D src/$(LIBNAME) $(DESTDIR)$(LUA_CDIR)/$(LIBNAME)
+-	$(INSTALL_PROGRAM) -D src/$T/lom.lua $(DESTDIR)$(LUA_LDIR)/$T/lom.lua
++	$(MKDIR) $(DESTDIR)$(LUA_CDIR)
++	$(INSTALL_PROGRAM) src/$(LIBNAME) $(DESTDIR)$(LUA_CDIR)/$(LIBNAME)
++	$(MKDIR) $(DESTDIR)$(LUA_LDIR)/$T
++	$(INSTALL_PROGRAM) src/$T/lom.lua $(DESTDIR)$(LUA_LDIR)/$T/lom.lua
+ 
+ clean:
+ 	$(RM) src/$(LIBNAME) $(OBJS)
