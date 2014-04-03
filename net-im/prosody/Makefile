@@ -2,8 +2,7 @@
 # $FreeBSD: head/net-im/prosody/Makefile 348629 2014-03-19 15:59:50Z lx $
 
 PORTNAME=	prosody
-PORTVERSION=	0.9.3
-PORTREVISION=	2
+PORTVERSION=	0.9.4
 CATEGORIES=	net-im
 MASTER_SITES=	http://prosody.im/downloads/source/ \
 				http://redundancy.redundancy.org/mirror/
@@ -27,23 +26,23 @@ USE_RC_SUBR=	prosody
 MANCOMPRESSED=	no
 
 OPTIONS_DEFINE= LUAJIT
-LUAJIT_DESC=	Run prosody using luajit
-LUAJIT_LIB_DEPENDS=	libluajit-5.1.so:${PORTSDIR}/lang/luajit
+LUAJIT_DESC=    Run prosody using luajit
+LUAJIT_LIB_DEPENDS=     libluajit-5.1.so:${PORTSDIR}/lang/luajit
 
 .include <bsd.port.options.mk>
 
 USES=		gmake
 USE_LUA=	5.1
 WANT_LUA_VER=	5.1
+
+HAS_CONFIGURE=	yes
 .if ${PORT_OPTIONS:MLUAJIT}
 CONFIGURE_ARGS+= --runwith=`which luajit`
 .else
 # cannot use ${LUA_CMD} here, it's wrong/'lua'
 CONFIGURE_ARGS+= --runwith=lua-`which ${USE_LUA}`
 .endif
-
-HAS_CONFIGURE=	yes
-CONFIGURE_ARGS+= --ostype=freebsd --c-compiler="${CC}" --linker="${LD}"
+CONFIGURE_ARGS+=	--ostype=freebsd --c-compiler="${CC}" --linker="${LD}"
 CONFIGURE_ENV+=	LOCALBASE="${LOCALBASE}" PREFIX="${PREFIX}" LUA_SUFFIX="-${LUA_VER}" LUA_LIBDIR="${LUA_LIBDIR}" LUA_INCDIR="${LUA_INCDIR}"
 
 SUB_FILES=	pkg-deinstall
