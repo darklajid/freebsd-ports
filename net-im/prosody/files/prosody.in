@@ -16,12 +16,12 @@
 
 name="prosody"
 rcvar=prosody_enable
-command="/usr/local/bin/prosodyctl"
+command="%%PREFIX%%/bin/prosodyctl"
 
 load_rc_config $name
 
 prosody_enable=${prosody_enable:-"NO"}
-pidfile=${prosody_pidfile:-"/usr/local/var/lib/prosody/prosody.pid"}
+pidfile=${prosody_pidfile:-"%%PREFIX%%/var/lib/prosody/prosody.pid"}
 
 extra_commands="status"
 
@@ -32,7 +32,7 @@ status_cmd="prosody_cmd status"
 
 prosody_start()
 {
-	config="/usr/local/etc/prosody/prosody.cfg.lua"
+	config="%%PREFIX%%/etc/prosody/prosody.cfg.lua"
 	if grep -q '^daemonize[[:blank:]]*=[[:blank:]]*false' $config; then
 		# Prosody's not going to daemonize on its own, use daemon(8)
 		daemon $command start
