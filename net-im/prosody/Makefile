@@ -34,13 +34,15 @@ LUAJIT_LIB_DEPENDS=     libluajit-5.1.so:${PORTSDIR}/lang/luajit
 USES=		gmake
 USE_LUA=	5.1
 WANT_LUA_VER=	5.1
+LUA_PREMK=	yes
+
+.include <bsd.port.pre.mk>
 
 HAS_CONFIGURE=	yes
 .if ${PORT_OPTIONS:MLUAJIT}
 CONFIGURE_ARGS+= --runwith=`which luajit`
 .else
-# cannot use ${LUA_CMD} here, it's wrong/'lua'
-CONFIGURE_ARGS+= --runwith=lua-`which ${USE_LUA}`
+CONFIGURE_ARGS+= --runwith=`which ${LUA_CMD}`
 .endif
 CONFIGURE_ARGS+=	--ostype=freebsd --c-compiler="${CC}" --linker="${LD}"
 CONFIGURE_ENV+=	LOCALBASE="${LOCALBASE}" PREFIX="${PREFIX}" LUA_SUFFIX="-${LUA_VER}" LUA_LIBDIR="${LUA_LIBDIR}" LUA_INCDIR="${LUA_INCDIR}"
@@ -49,4 +51,4 @@ SUB_FILES=	pkg-deinstall
 SUB_LIST=	USERS=${USERS} GROUPS=${GROUPS}
 PLIST_SUB=	PROSODY_USER=${USERS} PROSODY_GROUP=${GROUPS}
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
