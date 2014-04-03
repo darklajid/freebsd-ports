@@ -17,13 +17,3 @@
 +	install -m644 prosody.cfg.lua.install $(CONFIG)/prosody.cfg.lua.sample
  	test -e prosody.version && install -m644 prosody.version $(SOURCE)/prosody.version || true
  	$(MAKE) install -C util-src
- 
-@@ -55,7 +55,7 @@
- 	$(MAKE) install -C util-src
- 
- %.install: %
--	sed "1s/\blua\b/$(RUNWITH)/; \
-+	sed "1s| lua$$| $(RUNWITH)|; \
- 		s|^CFG_SOURCEDIR=.*;$$|CFG_SOURCEDIR='$(INSTALLEDSOURCE)';|; \
- 		s|^CFG_CONFIGDIR=.*;$$|CFG_CONFIGDIR='$(INSTALLEDCONFIG)';|; \
- 		s|^CFG_DATADIR=.*;$$|CFG_DATADIR='$(INSTALLEDDATA)';|; \
