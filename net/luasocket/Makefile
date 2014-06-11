@@ -3,7 +3,7 @@
 
 PORTNAME=	luasocket
 PORTVERSION=	3.0r1
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	net
 PKGNAMEPREFIX=	${LUA_PKGNAMEPREFIX}
 
@@ -18,9 +18,7 @@ GH_PROJECT=	${PORTNAME}
 GH_TAGNAME=	v3.0-rc1
 GH_COMMIT=	22cd583
 
-USE_GMAKE=	yes
-USE_LUA?=	5.1
-LUA_COMPS=	lua
+USES=		lua:51 gmake pkgconfig
 INSTALL_TARGET=	install-unix
 
 CFLAGS+=    `pkgconf --cflags lua-${LUA_VER}` -I${LUA_INCDIR}

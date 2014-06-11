@@ -2,6 +2,7 @@
 
 PORTNAME=	luaevent
 PORTVERSION=	0.4.3
+PORTREVISION=	2
 CATEGORIES=	devel
 PKGNAMEPREFIX=	${LUA_PKGNAMEPREFIX}
 
@@ -16,11 +17,8 @@ GH_PROJECT=	${PORTNAME}
 GH_TAGNAME=	v${PORTVERSION}
 GH_COMMIT=	724e1f1
 
-USE_GMAKE=	yes
-USE_LUA?=	5.1
-LUA_COMPS=	lua
+USES=		lua:51 gmake pkgconfig
 
-BUILD_DEPENDS=	pkgconf:${PORTSDIR}/devel/pkgconf
 LIB_DEPENDS=	libevent.so:${PORTSDIR}/devel/libevent2
 
 CFLAGS+=	`pkgconf --cflags lua-${LUA_VER}` \
