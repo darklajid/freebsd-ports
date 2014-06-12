@@ -21,8 +21,8 @@ PLIST_FILES=	${LUA_MODLIBDIR}/zlib.so
 
 do-build:
 	${CC} -fPIC -shared -o ${WRKSRC}/zlib.so \
-		`pkgconf --cflags lua-${LUA_VER}` \
-                `pkgconf --libs lua-${LUA_VER}` \
+		$(pkgconf --cflags lua-${LUA_VER}) \
+		$(pkgconf --libs lua-${LUA_VER}) \
 		-llua -lm -lz ${WRKSRC}/lua_zlib.c
 
 do-install:
